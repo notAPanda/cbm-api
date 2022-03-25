@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSubscriptionRequest;
-use App\Http\Requests\UpdateSubscriptionRequest;
 use App\Models\Subscription;
+use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
 {
@@ -34,7 +33,7 @@ class SubscriptionController extends Controller
      * @param  \App\Http\Requests\StoreSubscriptionRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSubscriptionRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -68,7 +67,7 @@ class SubscriptionController extends Controller
      * @param  \App\Models\Subscription  $subscription
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSubscriptionRequest $request, Subscription $subscription)
+    public function update(Request $request, Subscription $subscription)
     {
         //
     }

@@ -9,8 +9,21 @@ class Playlist extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'cover_photo',
+        'is_public',
+        'user_id',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tracks()
+    {
+        return $this->belongsToMany(Track::class, 'playlist_track');
     }
 }

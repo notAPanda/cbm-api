@@ -7,7 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'description',
+        'author_photo',
+    ];
 
     public function albums()
     {

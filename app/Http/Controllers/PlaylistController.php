@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePlaylistRequest;
-use App\Http\Requests\UpdatePlaylistRequest;
 use App\Models\Playlist;
+use Illuminate\Http\Request;
 
 class PlaylistController extends Controller
 {
@@ -34,7 +33,7 @@ class PlaylistController extends Controller
      * @param  \App\Http\Requests\StorePlaylistRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePlaylistRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -68,7 +67,7 @@ class PlaylistController extends Controller
      * @param  \App\Models\Playlist  $playlist
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePlaylistRequest $request, Playlist $playlist)
+    public function update(Request $request, Playlist $playlist)
     {
         //
     }

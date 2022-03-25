@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTrackRequest;
-use App\Http\Requests\UpdateTrackRequest;
 use App\Models\Track;
+use Illuminate\Http\Request;
 
 class TrackController extends Controller
 {
@@ -34,7 +33,7 @@ class TrackController extends Controller
      * @param  \App\Http\Requests\StoreTrackRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTrackRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -68,7 +67,7 @@ class TrackController extends Controller
      * @param  \App\Models\Track  $track
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTrackRequest $request, Track $track)
+    public function update(Request $request, Track $track)
     {
         //
     }
