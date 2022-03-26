@@ -27,7 +27,7 @@ class CheckIfAdmin
      */
     private function checkIfUserIsAdmin($user)
     {
-        return in_array($user->email, ['maqloch@gmail.com']);
+        return in_array($user->email, ['maqloch@gmail.com', 'contact@coherentbrainmusic.com']);
     }
 
     /**
