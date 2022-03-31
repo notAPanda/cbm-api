@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subscription;
+use App\Services\StripeService;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
@@ -25,6 +26,17 @@ class SubscriptionController extends Controller
     public function create()
     {
         //
+    }
+    public function sessionCreate(Request $request)
+    {
+        $user = $request->user();
+
+        $session = StripeService::sessionCreate($user);
+
+        return [
+            'session_url' => $session->url,
+            'user' => $user,
+        ];
     }
 
     /**
@@ -81,5 +93,34 @@ class SubscriptionController extends Controller
     public function destroy(Subscription $subscription)
     {
         //
+    }
+
+    public function webhook(Request $request)
+    {
+        [$object, $type] = StripeService::processWebhook($request);
+
+        switch ($type) {
+            case 'checkout.session.completed':
+                StripeService::checkoutSessionCompleted($object);
+                break;
+            case 'invoice.paid':
+                StripeService::invoicePaid($object);
+                break;
+            case 'invoice.payment_failed':
+                StripeService::invoicePaymentFailed($object);
+                break;
+            case 'customer.subscription.updated':
+                StripeService::customerSubscriptionUpdated($object);
+                break;
+            case 'customer.subscription.deleted':
+                StripeService::customerSubscriptionDeleted($object);
+                break;
+
+                // ... handle other event types
+            default:
+                // Unhandled event type
+        }
+
+        return response()->json(['status' => 'success']);
     }
 }

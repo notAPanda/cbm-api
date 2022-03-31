@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TrackController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,11 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/albums-free', [AlbumController::class, 'free_index']);
+Route::get('/albums', [AlbumController::class, 'index']);
 
 Route::middleware(['auth:sanctum'])->group(function() {
-
-    Route::get('/albums', [AlbumController::class, 'index']);
+    Route::post('/subscription/session/create', [SubscriptionController::class, 'sessionCreate']);
     Route::get('/albums/{album}', [AlbumController::class, 'show']);
     
     Route::get('/authors', [AuthorController::class, 'index']);
@@ -38,3 +38,6 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/tracks', [TrackController::class, 'index']);
     Route::get('/track/{track}', [TrackController::class, 'show']);
 });
+
+
+Route::post('/stripe/webhook', [SubscriptionController::class, 'webhook']);
