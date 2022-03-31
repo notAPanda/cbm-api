@@ -37,8 +37,8 @@ class StripeService
         $session = $stripe->checkout->sessions->create([
             'client_reference_id' => $user->id,
             'customer' => $user->stripe_id,
-            'success_url' => env('APP_FRONTEND_URL') . '/subscription/success?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => env('APP_FRONTEND_URL') . '/subscription',
+            'success_url' => env('FRONTEND_APP_URL') . '/subscription/success?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => env('FRONTEND_APP_URL') . '/subscription',
             'mode' => 'subscription',
             'line_items' => [[
                 'price' => $priceId,
