@@ -44,8 +44,9 @@ class AlbumCrudController extends CrudController
         CRUD::column('description');
         CRUD::column('cover_photo');
         CRUD::column('author_id');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
+        CRUD::column('access_group');
+        // CRUD::column('created_at');
+        // CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -69,6 +70,13 @@ class AlbumCrudController extends CrudController
         CRUD::field('description');
         CRUD::field('cover_photo');
         CRUD::field('author_id');
+        CRUD::field('access_group')
+            ->type('select_from_array')
+            ->options([
+                'premium' => 'Premium',
+                'login' => 'Login',
+                'free' => 'Free',
+            ]);
         // CRUD::field('created_at');
         // CRUD::field('updated_at');
 

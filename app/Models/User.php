@@ -37,7 +37,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'subscriptionStatus',
+        'premium',
     ];
 
     /**
@@ -49,9 +49,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getSubscriptionStatusAttribute() {
+    public function getPremiumAttribute() {
         if ($this->subscription) {
-            return $this->subscription->stripe_status;
+            return in_array($this->subscription->stripe_status, ['active', 'past_due']);
         }
         return false;
     }

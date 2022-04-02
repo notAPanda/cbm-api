@@ -14,6 +14,16 @@ class Track extends Model
         'title',
         'url',
         'album_id',
+        'access_group',
+    ];
+
+    protected $hidden = [
+        'access_group',
+        'url',
+    ];
+
+    protected $appends = [
+        'src',
     ];
 
     public function album()
@@ -23,5 +33,23 @@ class Track extends Model
     public function playlists()
     {
         return $this->belongsToMany(Playlist::class, 'playlist_track');
+    }
+
+    public function getSrcAttribute() {
+        $user = request()->user();
+
+        if ($this->access_group === 'free') {
+            return $this->url;
+        }
+
+        if ($this->access_group === 'login' && $user) {
+            return $this->url;
+        }
+        
+        if ($user && $user->premium && $this->access_group === 'premium') {
+            return $this->url;
+        }
+
+        return null;
     }
 }

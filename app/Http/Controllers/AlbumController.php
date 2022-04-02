@@ -13,25 +13,11 @@ class AlbumController extends Controller
     {
         $user = auth()->user();
 
-        $albums = Album::with(['author', 'tracks'])
-            ->when(!$user, function ($q) {
-                $q->limit(5);
-            })
-            ->get();
+        $albums = Album::with(['author', 'tracks'])->get();
 
         return [
             "albums" => $albums,
             "user" => auth()->user(),
-        ];
-    }
-
-    public function free_index()
-    {
-        $albums = Album::with(['author', 'tracks'])->limit(5)->get();
-
-        return [
-            "albums" => $albums,
-            "user" => auth()->check()
         ];
     }
 
@@ -47,7 +33,11 @@ class AlbumController extends Controller
 
     public function show(Album $album)
     {
-        return $album;
+        $album->load(['tracks', 'author']);
+
+        return [
+            "album" => $album,
+        ];
     }
 
     public function edit(Album $album)

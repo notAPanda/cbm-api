@@ -133,7 +133,7 @@ class StripeService
                     $webhookSecret
                 );
             } catch (\Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
+                throw $e;
             }
         } else {
             $event = $request->all();

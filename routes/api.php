@@ -24,10 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/albums', [AlbumController::class, 'index']);
+Route::get('/albums/{album}', [AlbumController::class, 'show']);
 
 Route::middleware(['auth:sanctum'])->group(function() {
+
     Route::post('/subscription/session/create', [SubscriptionController::class, 'sessionCreate']);
-    Route::get('/albums/{album}', [AlbumController::class, 'show']);
     
     Route::get('/authors', [AuthorController::class, 'index']);
     Route::get('/authors/{author}', [AuthorController::class, 'show']);

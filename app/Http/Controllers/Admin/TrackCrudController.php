@@ -43,8 +43,9 @@ class TrackCrudController extends CrudController
         CRUD::column('title');
         CRUD::column('url');
         CRUD::column('album_id');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
+        CRUD::column('access_group');
+        // CRUD::column('created_at');
+        // CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -68,6 +69,14 @@ class TrackCrudController extends CrudController
         CRUD::field('url');
         CRUD::field('album_id');
         CRUD::field('playlists');
+        CRUD::field('access_group')
+            ->type('select_from_array')
+            ->options([
+                'premium' => 'Premium',
+                'login' => 'Login',
+                'free' => 'Free',
+            ]);
+
         // CRUD::field('created_at');
         // CRUD::field('updated_at');
 

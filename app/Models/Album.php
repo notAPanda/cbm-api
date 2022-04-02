@@ -15,6 +15,7 @@ class Album extends Model
         'description',
         'cover_photo',
         'author_id',
+        'access_group',
     ];
 
     public function tracks()
