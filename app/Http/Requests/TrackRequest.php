@@ -27,7 +27,9 @@ class TrackRequest extends FormRequest
         return [
             'title' => 'required|min:5|max:255',
             'url' => 'required|url',
+            'duration' => 'required|integer',
             'album_id' => 'required|integer',
+            'access_group' => 'required|string',
         ];
     }
 

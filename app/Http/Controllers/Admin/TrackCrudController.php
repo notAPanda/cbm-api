@@ -67,6 +67,7 @@ class TrackCrudController extends CrudController
         // CRUD::field('id');
         CRUD::field('title');
         CRUD::field('url');
+        CRUD::field('duration');
         CRUD::field('album_id');
         CRUD::field('playlists');
         CRUD::field('access_group')

@@ -14,6 +14,7 @@ class Track extends Model
         'title',
         'url',
         'album_id',
+        'duration',
         'access_group',
     ];
 
