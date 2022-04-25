@@ -34,10 +34,12 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/authors/{author}', [AuthorController::class, 'show']);
     
     Route::get('/playlists', [PlaylistController::class, 'index']);
-    Route::get('/playlist/{playlist}', [PlaylistController::class, 'show']);
+    Route::get('/playlists/{playlist}', [PlaylistController::class, 'show']);
+    Route::get('/liked', [PlaylistController::class, 'liked']);
     
     Route::get('/tracks', [TrackController::class, 'index']);
-    Route::get('/track/{track}', [TrackController::class, 'show']);
+    Route::get('/tracks/{track}', [TrackController::class, 'show']);
+    Route::post('/tracks/{track}/love', [TrackController::class, 'love']);
 });
 
 

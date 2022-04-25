@@ -12,9 +12,27 @@ class PlaylistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Playlist::paginate(10);
+        $user = $request->user();
+
+        $playlists = $user->playlists()->get();
+
+        return response()->json([
+            'playlists' => $playlists,
+        ]);
+    }
+
+    public function liked(Request $request)
+    {
+        $user = $request->user();
+
+        $liked = $user->playlists()->where('title', 'Liked')->with('tracks.album.author')->first();
+
+        return response()->json([
+            'liked' => $liked,
+        ]);
+
     }
 
     /**
@@ -46,7 +64,11 @@ class PlaylistController extends Controller
      */
     public function show(Playlist $playlist)
     {
-        return $playlist;
+        $playlist->load(['tracks.album.author']);
+
+        return [
+            "playlist" => $playlist,
+        ];
     }
 
     /**

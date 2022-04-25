@@ -61,6 +61,29 @@ class TrackController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Track  $track
+     * @return \Illuminate\Http\Response
+     */
+    public function love(Request $request, Track $track)
+    {
+        $user = $request->user();
+
+        $liked = $user->playlists()->firstOrCreate([
+            'title' => 'Liked',
+        ]);
+
+        $track->playlists()->toggle($liked);
+
+        $liked->load('tracks');
+
+        return response()->json([
+            'liked' => $liked,
+        ]);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateTrackRequest  $request
